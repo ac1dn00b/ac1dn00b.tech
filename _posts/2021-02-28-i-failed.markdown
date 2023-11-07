@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "Well, I failed"
+date:   2020-09-28 19:40:00 -0300
+categories: general
+---
+When I started the site my idea was to keep it regularly updated. Clearly that did not happen.
+
+But well, in the meantime I did do many things, like moving to a new company where I am now on a DevOps role and busy learning the tools of the trade. That even got me programming with Python, something I always wanted to do. I picked up Vagrant, Ansible and even some Terraform along the way these past months. I also went back to KDE, tried Manjaro unsuccessfuly so I decided to stick to doing things manually with Arch.
+
+Anyway, I have a bunch of ideas for the future, things I'd love to do including getting back on track to becoming a Bug Bounty Hunter.

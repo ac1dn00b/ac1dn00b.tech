@@ -1,0 +1,9 @@
+posting steps
+1.- write post locally
+2.- copy de .markdown file to the server
+    scp [whatever].markdown orlyou@74.207.224.233:/home/orlyou/ac1dn00b.tech/_posts
+3.- login to the server
+4.- cd ac1dn00b.tech/
+5.- run bundle exec jekyll serve
+6.- sudo su -
+7.- cp -r /home/orlyou/ac1dn00b.tech/_site/* /usr/share/nginx/html/

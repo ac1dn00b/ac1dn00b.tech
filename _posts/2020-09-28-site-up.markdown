@@ -1,0 +1,291 @@
+---
+layout: post
+title:  "Site's up!"
+date:   2020-09-28 19:40:00 -0300
+categories: general
+---
+That was easy! Well, not so much to be honest. But it was less painful than expected.
+
+Yesterday while on a youtube rampage I came across one of Wolfgang's Channel videos related running a minimal blog, and since I had been thinking about making use of the domain I had registered it caught my eye.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N_ttw2Dihn8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+This made me start looking into static site generators and a name kept coming up: Jekyll. I didn't take long to notice that many sites I have visited lately are created using it so I decided to try it myself, 6 hours later I was launching this site to the world.
+
+Installing and using Jekyll is fairly simple, this is how's it's done for Arch Linux (notice that this is all done with a regular user, no need for root or sudo):
+
+`curl -L https://get.rvm.io | bash -s stable`
+
+Initially this command will throw an error message which also provides the command to solve it:
+
+```
+[orlyou@archlinux ~]$ curl -L https://get.rvm.io | bash -s stable
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   194  100   194    0     0    118      0  0:00:01  0:00:01 --:--:--   118
+100 24535  100 24535    0     0  11567      0  0:00:02  0:00:02 --:--:-- 1140k
+Downloading https://github.com/rvm/rvm/archive/1.29.10.tar.gz
+Downloading https://github.com/rvm/rvm/releases/download/1.29.10/1.29.10.tar.gz.asc
+gpg: directory '/home/orlyou/.gnupg' created
+gpg: keybox '/home/orlyou/.gnupg/pubring.kbx' created
+gpg: Signature made Wed Mar 25 18:58:42 2020 -03
+gpg:                using RSA key 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg: Can't check signature: No public key
+GPG signature verification failed for '/home/orlyou/.rvm/archives/rvm-1.29.10.tgz' - 'https://github.com/rvm/rvm/releases/download/1.29.10/1.29.10.tar.gz.asc'! Try to install GPG v2 and then fetch the public key:
+
+    gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+
+or if it fails:
+
+    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+
+In case of further problems with validation please refer to https://rvm.io/rvm/security
+
+[orlyou@archlinux ~]$ gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg: /home/orlyou/.gnupg/trustdb.gpg: trustdb created
+gpg: key 105BD0E739499BDB: public key "Piotr Kuczynski <piotr.kuczynski@gmail.com>" imported
+gpg: key 3804BB82D39DC0E3: public key "Michal Papis (RVM signing) <mpapis@gmail.com>" imported
+gpg: Total number processed: 2
+gpg:               imported: 2`
+```
+
+After that's completed, the command can be run again
+
+```
+[orlyou@archlinux ~]$ curl -L https://get.rvm.io | bash -s stable                                                                % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   194  100   194    0     0    279      0 --:--:-- --:--:-- --:--:--   279
+100 24535  100 24535    0     0  28695      0 --:--:-- --:--:-- --:--:--  584k
+Downloading https://github.com/rvm/rvm/archive/1.29.10.tar.gz
+Downloading https://github.com/rvm/rvm/releases/download/1.29.10/1.29.10.tar.gz.asc
+gpg: Signature made Wed Mar 25 18:58:42 2020 -03
+gpg:                using RSA key 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg: Good signature from "Piotr Kuczynski <piotr.kuczynski@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 7D2B AF1C F37B 13E2 069D  6956 105B D0E7 3949 9BDB
+GPG verified '/home/orlyou/.rvm/archives/rvm-1.29.10.tgz'
+Installing RVM to /home/orlyou/.rvm/
+    Adding rvm PATH line to /home/orlyou/.profile /home/orlyou/.mkshrc /home/orlyou/.bashrc /home/orlyou/.zshrc.
+    Adding rvm loading line to /home/orlyou/.profile /home/orlyou/.bash_profile /home/orlyou/.zlogin.
+Installation of RVM in /home/orlyou/.rvm/ is almost complete:
+
+  * To start using RVM you need to run `source /home/orlyou/.rvm/scripts/rvm`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
+Thanks for installing RVM 🙏
+Please consider donating to our open collective to help us maintain RVM.
+
+👉  Donate: https://opencollective.com/rvm/donate
+```
+
+Log out and log back in and you should be able to run rvm commands:
+
+```
+rvm --version
+rvm 1.29.10 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+```
+
+
+Next step is to install ruby latest:
+
+```
+[orlyou@archlinux ~]$ rvm install ruby
+Searching for binary rubies, this might take some time.
+No binary rubies available for: arch/libc-2.32/x86_64/ruby-2.7.0.
+Continuing with compilation. Please read 'rvm help mount' to get more information on binary rubies.
+Checking requirements for arch.
+Requirements installation successful.
+Installing Ruby from source to: /home/orlyou/.rvm/rubies/ruby-2.7.0, this may take a while depending on your cpu(s)...
+ruby-2.7.0 - #downloading ruby-2.7.0, this may take a while depending on your connection...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 14.0M  100 14.0M    0     0  2196k      0  0:00:06  0:00:06 --:--:-- 3329k
+ruby-2.7.0 - #extracting ruby-2.7.0 to /home/orlyou/.rvm/src/ruby-2.7.0.....
+ruby-2.7.0 - #configuring.......................................................................
+ruby-2.7.0 - #post-configuration..
+ruby-2.7.0 - #compiling..............................................................................................................
+ruby-2.7.0 - #installing.................
+ruby-2.7.0 - #making binaries executable...
+Installed rubygems 3.1.2 is newer than 3.0.8 provided with installed ruby, skipping installation, use --force to force installation.
+ruby-2.7.0 - #gemset created /home/orlyou/.rvm/gems/ruby-2.7.0@global
+ruby-2.7.0 - #importing gemset /home/orlyou/.rvm/gemsets/global.gems................................................................
+ruby-2.7.0 - #generating global wrappers.......
+ruby-2.7.0 - #gemset created /home/orlyou/.rvm/gems/ruby-2.7.0
+ruby-2.7.0 - #importing gemsetfile /home/orlyou/.rvm/gemsets/default.gems evaluated to empty gem list
+ruby-2.7.0 - #generating default wrappers.......
+ruby-2.7.0 - #adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+Install of ruby-2.7.0 - #complete
+Ruby was built without documentation, to build it run: rvm docs generate-ri
+```
+Now we need to append the following line to the .profile config file on our home directory
+```
+PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+
+source .profile
+```
+And finally, our system is now ready to install jekyll, according to the [Official Jekyll Docs](https://jekyllrb.com/docs/) we do this with `gem install jekyll bundler`
+
+```
+[orlyou@archlinux ~]$ gem install jekyll bundler
+Fetching em-websocket-0.5.2.gem
+Fetching public_suffix-4.0.6.gem
+Fetching addressable-2.7.0.gem
+Fetching colorator-1.1.0.gem
+Fetching http_parser.rb-0.6.0.gem
+Fetching i18n-1.8.5.gem
+Fetching eventmachine-1.2.7.gem
+Fetching rb-fsevent-0.10.4.gem
+Fetching concurrent-ruby-1.1.7.gem
+Fetching ffi-1.13.1.gem
+Fetching sassc-2.4.0.gem
+Fetching jekyll-sass-converter-2.1.0.gem
+Fetching rb-inotify-0.10.1.gem
+Fetching listen-3.2.1.gem
+Fetching jekyll-watch-2.2.1.gem
+Fetching pathutil-0.16.2.gem
+Fetching liquid-4.0.3.gem
+Fetching mercenary-0.4.0.gem
+Fetching jekyll-4.1.1.gem
+Fetching kramdown-2.3.0.gem
+Fetching safe_yaml-1.0.5.gem
+Fetching kramdown-parser-gfm-1.1.0.gem
+Fetching rouge-3.23.0.gem
+Fetching forwardable-extended-2.6.0.gem
+Fetching unicode-display_width-1.7.0.gem
+Fetching terminal-table-1.8.0.gem
+Successfully installed public_suffix-4.0.6
+Successfully installed addressable-2.7.0
+Successfully installed colorator-1.1.0
+Building native extensions. This could take a while...
+Successfully installed eventmachine-1.2.7
+Building native extensions. This could take a while...
+Successfully installed http_parser.rb-0.6.0
+Successfully installed em-websocket-0.5.2
+Successfully installed concurrent-ruby-1.1.7`
+
+HEADS UP! i18n 1.1 changed fallbacks to exclude default locale.
+But that may break your application.
+
+If you are upgrading your Rails application from an older version of Rails:
+
+Please check your Rails app for 'config.i18n.fallbacks = true'.
+If you're using I18n (>= 1.1.0) and Rails (< 5.2.2), this should be
+'config.i18n.fallbacks = [I18n.default_locale]'.
+If not, fallbacks will be broken in your app by I18n 1.1.x.
+
+If you are starting a NEW Rails application, you can ignore this notice.
+
+For more info see:
+https://github.com/svenfuchs/i18n/releases/tag/v1.1.0
+
+Successfully installed i18n-1.8.5
+Building native extensions. This could take a while...
+Successfully installed ffi-1.13.1
+Building native extensions. This could take a while...
+
+Successfully installed sassc-2.4.0
+Successfully installed jekyll-sass-converter-2.1.0
+Successfully installed rb-fsevent-0.10.4
+Successfully installed rb-inotify-0.10.1
+Successfully installed listen-3.2.1
+Successfully installed jekyll-watch-2.2.1
+Successfully installed kramdown-2.3.0
+Successfully installed kramdown-parser-gfm-1.1.0
+Successfully installed liquid-4.0.3
+Successfully installed mercenary-0.4.0
+Successfully installed forwardable-extended-2.6.0
+Successfully installed pathutil-0.16.2
+Successfully installed rouge-3.23.0
+Successfully installed safe_yaml-1.0.5
+Successfully installed unicode-display_width-1.7.0
+Successfully installed terminal-table-1.8.0
+Successfully installed jekyll-4.1.1
+Parsing documentation for public_suffix-4.0.6
+Installing ri documentation for public_suffix-4.0.6
+Parsing documentation for addressable-2.7.0
+Installing ri documentation for addressable-2.7.0
+Parsing documentation for colorator-1.1.0
+Installing ri documentation for colorator-1.1.0
+Parsing documentation for eventmachine-1.2.7
+Installing ri documentation for eventmachine-1.2.7
+Parsing documentation for http_parser.rb-0.6.0
+unknown encoding name "chunked\r\n\r\n25" for ext/ruby_http_parser/vendor/http-parser-java/tools/parse_tests.rb, skipping
+Installing ri documentation for http_parser.rb-0.6.0
+Parsing documentation for em-websocket-0.5.2
+Installing ri documentation for em-websocket-0.5.2
+Parsing documentation for concurrent-ruby-1.1.7
+Installing ri documentation for concurrent-ruby-1.1.7
+Parsing documentation for i18n-1.8.5
+Installing ri documentation for i18n-1.8.5
+Parsing documentation for ffi-1.13.1
+Installing ri documentation for ffi-1.13.1
+Parsing documentation for sassc-2.4.0
+Installing ri documentation for sassc-2.4.0
+Parsing documentation for jekyll-sass-converter-2.1.0
+Installing ri documentation for jekyll-sass-converter-2.1.0
+Parsing documentation for rb-fsevent-0.10.4
+Installing ri documentation for rb-fsevent-0.10.4
+Parsing documentation for rb-inotify-0.10.1
+Installing ri documentation for rb-inotify-0.10.1
+Parsing documentation for listen-3.2.1
+Installing ri documentation for listen-3.2.1
+Parsing documentation for jekyll-watch-2.2.1
+Installing ri documentation for jekyll-watch-2.2.1
+Parsing documentation for kramdown-2.3.0
+Installing ri documentation for kramdown-2.3.0
+Parsing documentation for kramdown-parser-gfm-1.1.0
+Installing ri documentation for kramdown-parser-gfm-1.1.0
+Parsing documentation for liquid-4.0.3
+Installing ri documentation for liquid-4.0.3
+Parsing documentation for mercenary-0.4.0
+Installing ri documentation for mercenary-0.4.0
+Parsing documentation for forwardable-extended-2.6.0
+Installing ri documentation for forwardable-extended-2.6.0
+Parsing documentation for pathutil-0.16.2
+Installing ri documentation for pathutil-0.16.2
+Parsing documentation for rouge-3.23.0
+Installing ri documentation for rouge-3.23.0
+Parsing documentation for safe_yaml-1.0.5
+Installing ri documentation for safe_yaml-1.0.5
+Parsing documentation for unicode-display_width-1.7.0
+Installing ri documentation for unicode-display_width-1.7.0
+Parsing documentation for terminal-table-1.8.0
+Installing ri documentation for terminal-table-1.8.0
+Parsing documentation for jekyll-4.1.1
+Installing ri documentation for jekyll-4.1.1
+Done installing documentation for public_suffix, addressable, colorator, eventmachine, http_parser.rb, em-websocket, concurrent-ruby, i18n, ffi, sassc, jekyll-sass-converter, rb-fsevent, rb-inotify, listen, jekyll-watch, kramdown, kramdown-parser-gfm, liquid, mercenary, forwardable-extended, pathutil, rouge, safe_yaml, unicode-display_width, terminal-table, jekyll after 105 seconds
+Fetching bundler-2.1.4.gem
+Successfully installed bundler-2.1.4
+Parsing documentation for bundler-2.1.4
+Installing ri documentation for bundler-2.1.4
+Done installing documentation for bundler after 13 seconds
+27 gems installed
+[orlyou@archlinux ~]$
+```
+
+And that's all, from this point on you can follow their instructions to move forward with creating your site, but these are the commands in a nutshell:
+
+```
+jekyll new [your site name]
+
+cd [your site name]
+
+bundle exec jekyll serve
+```
+
+Here's a link to the official guide on how to create new posts, it's a very simple and straightforward process but at first it takes a little bit to get used to: [How to create posts with Jekyll](https://jekyllrb.com/docs/posts/)
+
+After all this and when you are ready to publish your site, first you need to have a domain registered (which I already had ;) ) and must have some hosting service. I have mine on Linode, so I followed the instructions from these links to complete the process:
+
+[How to configure a Domain Name on Linode](https://www.linode.com/community/questions/19221/how-to-configure-a-domain-name-step-by-step-on-a-linode-server-platform)
+
+[How to configure a DNS Manager on Linode](https://www.linode.com/docs/platform/manager/dns-manager/)
+
+Your site files should be located on your web server's html directory, in my case I'm using nginx so the correct directory is `/usr/share/nginx/html`, of course you need to be sure that the web server is running.
+
+To sum up, I wanted to write this guide since even though it is a relatively simple process, it does take some time and in my case I found myself stumbling a lot of error messages and having to do a lot of googling.
+
+Hope someone out there finds it useful.
+
+Next stop, how to make the site use https.

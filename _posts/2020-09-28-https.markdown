@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "https is here"
+date:   2020-09-28 21:56:00 -0300
+categories: general
+---
+
+Didn't expect to be back here so soon yet here I am. Installing the certificates took a very short time, including some troubleshooting that was reqired.
+
+First, install certbot and the nginx plugin:
+
+`# pacman -S certbot certbot-nginx`
+
+
+After that I ran `certbot --nginx` directly, but it failed:
+
+```
+# certbot --nginx
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator nginx, Installer nginx
+Enter email address (used for urgent renewal and security notices)
+ (Enter 'c' to cancel): your@email.com
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+agree in order to register with the ACME server at
+https://acme-v02.api.letsencrypt.org/directory
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(A)gree/(C)ancel: A
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Would you be willing, once your first certificate is successfully issued, to
+share your email address with the Electronic Frontier Foundation, a founding
+partner of the Let's Encrypt project and the non-profit organization that
+develops Certbot? We'd like to send you email about our work encrypting the web,
+EFF news, campaigns, and ways to support digital freedom.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: Y
+No names were found in your configuration files. Please enter in your domain
+name(s) (comma and/or space separated)  (Enter 'c' to cancel): ac1dn00b.tech
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for ac1dn00b.tech
+Using default address 80 for authentication.
+2020/09/29 00:29:56 [warn] 94015#94015: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2020/09/29 00:29:56 [notice] 94015#94015: signal process started
+Waiting for verification...
+Cleaning up challenges
+2020/09/29 00:30:03 [warn] 94019#94019: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2020/09/29 00:30:03 [notice] 94019#94019: signal process started
+Could not automatically find a matching server block for ac1dn00b.tech. Set the 'server_name' directive to use the Nginx installer.
+
+IMPORTANT NOTES:
+ - Unable to install the certificate
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/ac1dn00b.tech/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/ac1dn00b.tech/privkey.pem
+   Your cert will expire on 2020-12-27. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot again
+   with the "certonly" option. To non-interactively renew *all* of
+   your certificates, run "certbot renew"
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+```
+Our problem is here <span style="color:red">`Could not automatically find a matching server block for ac1dn00b.tech. Set the 'server_name' directive to use the Nginx installer.`</span>
+
+In order to solve this we need to change `server_name  localhost;` to `server_name  [your domain];` in the nginx configuration file (`/etc/nginx/nginx.conf`).
+
+Running the `certbot --nginx` command again should now detect your site and complete successfully:
+
+```
+# certbot --nginx
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator nginx, Installer nginx
+
+Which names would you like to activate HTTPS for?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: ac1dn00b.tech
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate numbers separated by commas and/or spaces, or leave input
+blank to select all options shown (Enter 'c' to cancel): 1
+Cert not yet due for renewal
+
+You have an existing certificate that has exactly the same domains or certificate name you requested and isn't close to expiry.
+(ref: /etc/letsencrypt/renewal/ac1dn00b.tech.conf)
+
+What would you like to do?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: Attempt to reinstall this existing certificate
+2: Renew & replace the cert (may be subject to CA rate limits)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 1
+Keeping the existing certificate
+Deploying Certificate to VirtualHost /etc/nginx/nginx.conf
+2020/09/29 00:40:15 [warn] 94100#94100: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2020/09/29 00:40:15 [notice] 94100#94100: signal process started
+Redirecting all traffic on port 80 to ssl in /etc/nginx/nginx.conf
+2020/09/29 00:40:16 [warn] 94102#94102: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2020/09/29 00:40:16 [notice] 94102#94102: signal process started
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Congratulations! You have successfully enabled https://ac1dn00b.tech
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Subscribe to the EFF mailing list (email: orlyounux@gmail.com).
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/ac1dn00b.tech/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/ac1dn00b.tech/privkey.pem
+   Your cert will expire on 2020-12-27. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot again
+   with the "certonly" option. To non-interactively renew *all* of
+   your certificates, run "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+Just in case I restarted nginx with `systemctl restart nginx`, and now the site is properly using https:
+
+![https](/assets/https.png)
