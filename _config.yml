@@ -28,9 +28,10 @@ twitter_username: acidn00b
 github_username:  ac1dn00b
 
 # Build settings
-theme: hacker
+remote_theme: hacker
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme
 
 # Exclude from processing.
 # The following items will not be processed, by default.
