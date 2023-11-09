@@ -10,5 +10,4 @@ Not that I've been on a cryogenic chamber asleep, lot's of things have happened 
 
 But well, here we are and with all the stuff that happened during this time I've come back with a different point of view: I'm not going to be declaring how I will be keeping this updated to only turn it into an obligation, taking the fun out of it and then getting frustrated if I "miss an update". This blog should reflect my personal growth and if for any reason I don't have anything to post I don't want to feel guilty, because that's what got my away from blogging the first time.
 
-I do have several post ideas since this last few months I have done a lot of changes on my workflow and I'm more active with bug hunting. Till next time. 
-
+I do have several post ideas since this last few months I have done a lot of changes on my workflow and I'm more active with bug hunting. Till next time.
