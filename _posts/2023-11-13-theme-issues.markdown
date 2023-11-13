@@ -9,6 +9,7 @@ I've had a hard time switching to the hacker theme which ultimately ended in my 
 I started by following the Github Pages tutorial on themes and of course the [Hacker](https://pages.github.com/themes/) name caught my attention. For installation I followed the instructions on the [Github Pages How To](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll) which actually are different from the ones on the [Theme Github Repo](https://github.com/pages-themes/hacker).
 
 Initially it was rendering either only the title like a hyperlink and later only a blank page, google gave this results that were similar to my issue:
+
 [Post 1](https://stackoverflow.com/questions/75393879/why-is-my-completely-new-jekyll-blog-blank-when-i-add-the-supported-hacker-theme)
 
 [Post 2](https://stackoverflow.com/questions/74904492/github-pages-site-will-not-load-any-theme-other-than-minima)
@@ -35,7 +36,7 @@ about:
 index:
 `layout: home` to `layout: post`
 
-Now the build gave no warnings but it's not quite working yet:
+Now the build gave no warnings but it wasn't quite working yet:
 
 ![hacker-theme](/assets/hacker-theme.png)
 
