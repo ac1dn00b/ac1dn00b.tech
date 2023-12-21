@@ -12,6 +12,6 @@ What changed this time is that for a few months now I had been using Hyprland wh
 
 So because of that yesterday I did go back to KDE Plasma but now it just didn't cut it for me anymore, I didn't feel comfortable on that DE anymore and for some cosmic reason last night I watched this video from ThePrimeagen
 
-<embed width="560" height="315" src="https://www.youtube.com/embed/bdumjiHabhQ?si=2A1XA9DUiEsnBnOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></embed>
+<embed width="560" height="315" src="https://www.youtube.com/embed/bdumjiHabhQ?si=2A1XA9DUiEsnBnOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 
 So this morning I woke up and just installed i3 along with the ly display manager and within 2 hours I had everything configured to my liking without any of the issues that I experienced previously with Hyprland. I'll probably try it again in the future or not, this minimalistic experience feels kinda just right.
