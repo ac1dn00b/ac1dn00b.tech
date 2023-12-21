@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "Moving to a Tiling Window Manager"
+date:   2023-12-21 00:00:00 -0300
+categories: general
+---
+For some time I wanted to make a blog post about the changes implemented to my workflow and today is a very good day for that, since I moved successfully to i3 for the first time less than 24 ours ago.
+
+Truth is I had tried i3 several times before but never successfully and now I understand that was related to the fact that I was not actually ready mentally.
+
+What changed this time is that for a few months now I had been using Hyprland which is really nice but I don't know if for some skill issue on my side or maybe because of Wayland issues, but found many things to not work properly. The most annoying being the fact that trying to play videos on VLC has a lot of dropped frames and then trying to run Java applications like BurpSuite also presents lots of issues with unresponsive menus that rendered the program almost unusable.
+
+So because of that yesterday I did go back to KDE Plasma but now it just didn't cut it for me anymore, I didn't feel comfortable on that DE anymore and for some cosmic reason last night I watched this video from ThePrimeagen
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=bdumjiHabhQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+So this morning I woke up and just installed i3 along with the ly display manager and within 2 hours I had everything configured to my liking without any of the issues that I experienced previously with Hyprland. I'll probably try it again in the future or not, this minimalistic experience feels kinda just right.
