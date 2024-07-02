@@ -1,0 +1,69 @@
+---
+layout: post
+title:  "RTFM"
+date:   2024-07-01 00:00:00 -0300
+categories: general
+---
+
+It's 10pm, some stuff happened that turned a regular day into a quite shitty one (nothing big but still annoying), so why not try relaxing for a bit by trying to move forward with the latest HTB Academy Module I started: SQL Injection Fundamentals.
+
+I hate databases, relational databases most of all, probably for some bad experiences I had with them in the past but hey! Nothing that a little bit of a positive mindset won't fix.
+
+So I was already a couple of sections in that required only reading and then I get to the 'Intro to MySQL' section which happens to be the first one that has an exercise at the end that requires an answer to move forward. recommended to use the Pwnbox instance, but it did not have `mysql` installed (WTF), started with the wrong foot: why would you recommend the Pwnbox instance if it does not have installed what is claimed to be installed for the user convenience?
+
+Not a problem, let me try from my own computer and then second bump in the road:
+
+```shell-session
+ERROR 2026 (HY000): TLS/SSL error: SSL is required, but the server does not support it
+```
+
+Apparently databases hate me as much as I hate them. 
+
+No worries, back to google. Maybe there's something wrong with the HTB instace? (probably not, up to this point all these kind of problems have been a skill issue on my side).
+
+So after like 20 minutes googling and about to give up, I finally found a clue:
+
+![huawei](/assets/huawei.png)
+
+YES! I found the solution! (On a chinese page of all places :facepalm:)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RDrfE9I8_hs?si=wlOEw7dWl2S5Fjd7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Still, not even this solved the problem (initially):
+
+```shell-session
+❯ mysql --protocol=tcp -u root -h IP -P PORT -p --ssl-mode=DISABLED
+mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead
+mysql: unknown variable 'ssl-mode=DISABLED'
+
+❯ mysql --protocol=tcp -u root -h IP -P PORT -p --tsl-mode=DISABLED
+mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead
+mysql: unknown variable 'tsl-mode=DISABLED'
+```
+
+Did I mention that I hate databases?
+
+So, a quick search for `ssl` on the `mysql` man page gave me the correct option:
+
+```
+--ssl
+
+           Enable SSL for connection (automatically enabled with other flags). Disable with --skip-ssl.
+```
+
+And then:
+
+```shell-session
+❯ mysql --protocol=tcp -u root -h PORT -P ip -p --skip-ssl
+
+...SNIP...
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+```
+
+By the time I got to that point it was already 11pm.
+
+Remember kids, always RTFM.
+
